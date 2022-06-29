@@ -1,0 +1,41 @@
+<html>
+<script src="https://jspreadsheet.com/v8/jspreadsheet.js"></script>
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<link rel="stylesheet" href="https://jspreadsheet.com/v8/jspreadsheet.css" type="text/css" />
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+<div id="spreadsheet"></div>
+<script>
+
+	// Data
+	var data = [];
+
+	// Create the data
+	for (var j = 0; j < 50000; j++) {
+		data[j] = [];
+		for (var i = 0; i < 20; i++) {
+			data[j][i] = jspreadsheet.helpers.getColumnNameFromCoords(i, j);
+		}
+	}
+
+	// Initial time before creating the table
+	var s = Date.now();
+
+	// Create the table
+	jspreadsheet(document.getElementById('spreadsheet'), {
+		worksheets: [{
+			data: data,
+			tableOverflow: true,
+			tableWidth: '800px',
+			tableHeight: '300px',
+		}],
+		onload: function () {
+			// Final time 
+			var e = Date.now();
+			// Update console
+			document.getElementById('console').innerText = 'The table was created in: ' + (e - s) + 'ms';
+		},
+		parseFormulas: false,
+	})
+</script>
+
+</html>
