@@ -1,41 +1,34 @@
-<html>
-<script src="https://jspreadsheet.com/v8/jspreadsheet.js"></script>
-<script src="https://jsuites.net/v4/jsuites.js"></script>
-<link rel="stylesheet" href="https://jspreadsheet.com/v8/jspreadsheet.css" type="text/css" />
-<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
-<div id="spreadsheet"></div>
-<script>
+<!DOCTYPE html>
+<html lang="en">
 
-	// Data
-	var data = [];
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" />
+</head>
 
-	// Create the data
-	for (var j = 0; j < 50000; j++) {
-		data[j] = [];
-		for (var i = 0; i < 20; i++) {
-			data[j][i] = jspreadsheet.helpers.getColumnNameFromCoords(i, j);
-		}
-	}
-
-	// Initial time before creating the table
-	var s = Date.now();
-
-	// Create the table
-	jspreadsheet(document.getElementById('spreadsheet'), {
-		worksheets: [{
-			data: data,
-			tableOverflow: true,
-			tableWidth: '800px',
-			tableHeight: '300px',
-		}],
-		onload: function () {
-			// Final time 
-			var e = Date.now();
-			// Update console
-			document.getElementById('console').innerText = 'The table was created in: ' + (e - s) + 'ms';
-		},
-		parseFormulas: false,
-	})
-</script>
+<body>
+	<div class="spreadsheet" id='spreadsheet'></div>
+	<div class="values" id="values">
+		<div>
+			<label>Row :</label>
+			<input type="number" id="row" name="Row">
+		</div>
+		<div>
+			<label>Column :</label>
+			<input type="number" id="column" name="Column">
+		</div>
+	</div>
+	<input type="button" id="create" value="Generate">
+	<div class="textarea"></div><textarea id="textarea" hidden></textarea></div>
+	<div>
+		<input type='button' id="exp" value="Export JSON">
+		<input type='button' id="imp" value="Import JSON">
+	</div>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+	<script src="/js/script.js"></script>
+</body>
 
 </html>
